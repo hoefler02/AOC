@@ -40,7 +40,11 @@ fn main() {
             curr = 0;
         }
     }
+
+    // largest is first challenge
     println!("Max Arr: {:?}", maxs);
+    // second challenge
     println!("Max Sum: {}", maxs.iter().sum::<u32>());
+
 }
 
