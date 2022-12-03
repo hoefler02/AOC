@@ -12,80 +12,82 @@ pub fn run() {
     };
     let s = part_one_score(content.clone()).unwrap();
     println!("Part One: {}", s);
-    let s = part_two_score(content).unwrap();
+    let s = part_two_score(content.clone()).unwrap();
     println!("Part Two: {}", s);
 }
 
-// paper beats rock
-// rock beats scissors
-// scissors beats paper
-
 #[derive(Debug, Clone, PartialEq, Eq)]
-enum Game {
-    Rock, // 0
-    Paper, // 1
-    Scissors // 2
+enum Move {
+    Rock = 1,
+    Paper = 2,
+    Scissors = 3
+}
+#[derive(Debug, Clone, PartialEq, Eq)] enum Outcome {
+    Loss,
+    Tie,
+    Win
+}
+
+fn get_move(letter: char) -> Option<Move> {
+    match letter {
+        'A' | 'X' => Some(Move::Rock),
+        'B' | 'Y' => Some(Move::Paper),
+        'C' | 'Z' => Some(Move::Scissors),
+         _  => None
+    }
 }
 
 
+fn get_outcome(letter: char) -> Option<Outcome> {
+    match letter {
+        'X' => Some(Outcome::Loss),
+        'Y' => Some(Outcome::Tie),
+        'Z' => Some(Outcome::Win),
+         _  => None
+    }
+}
+
 fn part_one_score(games: String) -> Option<u32> {
     let mut s = 0;
+    // cycle through the games
     for game in games.lines() {
-        let mut moves = game.split_whitespace();
-        // probably not the best way to get the first chars :)
-        let theirs = letter_to_move(moves.next().unwrap_or_default().chars().next().unwrap_or_default());
-        let ours = letter_to_move(moves.next().unwrap_or_default().chars().next().unwrap_or_default());
-        if ours.is_none() || theirs.is_none() {
-            eprintln!("File Format Error!");
-            process::exit(1);
-        }
-        let ours = ours.unwrap();
-        let theirs = theirs.unwrap();
+        // remove the spaces
+        let mut moves = game.chars().filter(|c| !c.is_whitespace());
+        let m1 = get_move(moves.next()?)?; // their move
+        let m2 = get_move(moves.next()?)?; // our move
         // add the move value
-        s += (ours.clone() as u32) + 1;
+        s += m2.clone() as u32;
         // if we have a tie
-        if ours == theirs {
+        if m1 == m2 {
             s += 3;
         } 
         // if we have a win
-        if (ours == Game::Paper && theirs == Game::Rock) ||
-           (ours == Game::Scissors && theirs == Game::Paper) ||
-           (ours == Game::Rock && theirs == Game::Scissors) {
+        if (m2 == Move::Paper && m1 == Move::Rock) ||
+           (m2 == Move::Scissors && m1 == Move::Paper) ||
+           (m2 == Move::Rock && m1 == Move::Scissors) {
                s += 6;
         }
     }
     Some(s)
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-enum Outcome {
-    Loss,
-    Tie,
-    Win
-}
 
 fn part_two_score(games: String) -> Option<u32> {
     let mut s = 0;
     for game in games.lines() {
-        let mut moves = game.split_whitespace();
-        // probably not the best way to get the first chars :)
-        let theirs = letter_to_move(moves.next().unwrap_or_default().chars().next().unwrap_or_default());
-        let outcome = letter_to_outcome(moves.next().unwrap_or_default().chars().next().unwrap_or_default());
-        if outcome.is_none() || theirs.is_none() {
-            eprintln!("File Format Error!");
-            process::exit(1);
-        }
-        let outcome = outcome.unwrap();
-        let theirs = theirs.unwrap();
+        let mut moves = game.chars().filter(|c| !c.is_whitespace());
+        let m = get_move(moves.next()?)?;
+        let o = get_outcome(moves.next()?)?;
         // add the win/tie/loss value
-        s += (outcome.clone() as u32) * 3;
-        if (outcome == Outcome::Loss && theirs == Game::Paper) ||
-           (outcome == Outcome::Tie  && theirs == Game::Rock)  ||
-           (outcome == Outcome::Win  && theirs == Game::Scissors) {
-               s += 1;
-        } else if (outcome == Outcome::Loss && theirs == Game::Scissors) ||
-                  (outcome == Outcome::Tie && theirs == Game::Paper) ||
-                  (outcome == Outcome::Win && theirs == Game::Rock) {
+        s += (o.clone() as u32) * 3;
+        // manually checking the move (9 basic cases)
+        if (o == Outcome::Loss && m == Move::Paper) ||
+           (o == Outcome::Tie  && m == Move::Rock)  ||
+           (o == Outcome::Win  && m == Move::Scissors) {
+                s += 1;
+        } else if (o == Outcome::Loss  &&  m == Move::Scissors) ||
+                  (o == Outcome::Tie   &&  m == Move::Paper) ||
+                  (o == Outcome::Win   &&  m == Move::Rock) {
                 s += 2;
         } else {
                 s += 3;
@@ -94,25 +96,4 @@ fn part_two_score(games: String) -> Option<u32> {
     Some(s)
 }
 
-fn letter_to_move(letter: char) -> Option<Game> {
-    match letter {
-        'A' => Some(Game::Rock),
-        'B' => Some(Game::Paper),
-        'C' => Some(Game::Scissors),
-        'X' => Some(Game::Rock),
-        'Y' => Some(Game::Paper),
-        'Z' => Some(Game::Scissors),
-         _  => None
-    }
-}
-
-
-fn letter_to_outcome(letter: char) -> Option<Outcome> {
-    match letter {
-        'X' => Some(Outcome::Loss),
-        'Y' => Some(Outcome::Tie),
-        'Z' => Some(Outcome::Win),
-         _  => None
-    }
-}
 
