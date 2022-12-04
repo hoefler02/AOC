@@ -7,6 +7,8 @@ mod calorie;
 mod rock_paper_scissors;
 #[path="./03-rucksack.rs"]
 mod rucksack;
+#[path="./04-camp-cleanup.rs"]
+mod camp_cleanup;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -19,6 +21,7 @@ fn main() {
         1 => calorie::run(),
         2 => rock_paper_scissors::run(),
         3 => rucksack::run(),
+        4 => camp_cleanup::run(),
         _ => {
             eprintln!("Invalid Day Value.");
             process::exit(1)
