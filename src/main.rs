@@ -5,6 +5,8 @@ use std::env;
 mod calorie;
 #[path="./02-rock-paper-scissors.rs"]
 mod rock_paper_scissors;
+#[path="./03-rucksack.rs"]
+mod rucksack;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -16,6 +18,7 @@ fn main() {
     match day {
         1 => calorie::run(),
         2 => rock_paper_scissors::run(),
+        3 => rucksack::run(),
         _ => {
             eprintln!("Invalid Day Value.");
             process::exit(1)
