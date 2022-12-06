@@ -11,15 +11,15 @@ pub fn run() {
 
 
 fn move_around(content: String) -> Option<String> {
-    let mut s1 = vec!['G', 'T', 'R', 'W'];
-    let mut s2 = vec!['G', 'C', 'H', 'P', 'M', 'S', 'V', 'W'];
-    let mut s3 = vec!['C', 'L', 'T', 'S', 'G', 'M'];
-    let mut s4 = vec!['J', 'H', 'D', 'M', 'W', 'R', 'F'];
-    let mut s5 = vec!['P', 'Q', 'L', 'H', 'S', 'W', 'F', 'J'];
-    let mut s6 = vec!['P', 'J', 'D', 'N', 'F', 'M', 'S'];
-    let mut s7 = vec!['Z', 'B', 'D', 'F', 'G', 'C', 'S', 'J'];
-    let mut s8 = vec!['R', 'T', 'B'];
-    let mut s9 = vec!['H', 'N', 'W', 'L', 'C'];
+    let s1 = vec!['G', 'T', 'R', 'W'];
+    let s2 = vec!['G', 'C', 'H', 'P', 'M', 'S', 'V', 'W'];
+    let s3 = vec!['C', 'L', 'T', 'S', 'G', 'M'];
+    let s4 = vec!['J', 'H', 'D', 'M', 'W', 'R', 'F'];
+    let s5 = vec!['P', 'Q', 'L', 'H', 'S', 'W', 'F', 'J'];
+    let s6 = vec!['P', 'J', 'D', 'N', 'F', 'M', 'S'];
+    let s7 = vec!['Z', 'B', 'D', 'F', 'G', 'C', 'S', 'J'];
+    let s8 = vec!['R', 'T', 'B'];
+    let s9 = vec!['H', 'N', 'W', 'L', 'C'];
     let mut s = [s1, s2, s3, s4, s5, s6, s7, s8, s9];
     for mov in content.lines() {
         let (_, n, _, from, _, to) = mov.split(' ').next_tuple().unwrap();
@@ -39,15 +39,15 @@ fn move_around(content: String) -> Option<String> {
 }
 
 fn move_around_two(content: String) -> Option<String> {
-    let mut s1 = vec!['G', 'T', 'R', 'W'];
-    let mut s2 = vec!['G', 'C', 'H', 'P', 'M', 'S', 'V', 'W'];
-    let mut s3 = vec!['C', 'L', 'T', 'S', 'G', 'M'];
-    let mut s4 = vec!['J', 'H', 'D', 'M', 'W', 'R', 'F'];
-    let mut s5 = vec!['P', 'Q', 'L', 'H', 'S', 'W', 'F', 'J'];
-    let mut s6 = vec!['P', 'J', 'D', 'N', 'F', 'M', 'S'];
-    let mut s7 = vec!['Z', 'B', 'D', 'F', 'G', 'C', 'S', 'J'];
-    let mut s8 = vec!['R', 'T', 'B'];
-    let mut s9 = vec!['H', 'N', 'W', 'L', 'C'];
+    let s1 = vec!['G', 'T', 'R', 'W'];
+    let s2 = vec!['G', 'C', 'H', 'P', 'M', 'S', 'V', 'W'];
+    let s3 = vec!['C', 'L', 'T', 'S', 'G', 'M'];
+    let s4 = vec!['J', 'H', 'D', 'M', 'W', 'R', 'F'];
+    let s5 = vec!['P', 'Q', 'L', 'H', 'S', 'W', 'F', 'J'];
+    let s6 = vec!['P', 'J', 'D', 'N', 'F', 'M', 'S'];
+    let s7 = vec!['Z', 'B', 'D', 'F', 'G', 'C', 'S', 'J'];
+    let s8 = vec!['R', 'T', 'B'];
+    let s9 = vec!['H', 'N', 'W', 'L', 'C'];
     let mut s = [s1, s2, s3, s4, s5, s6, s7, s8, s9];
     for mov in content.lines() {
         let (_, n, _, from, _, to) = mov.split(' ').next_tuple().unwrap();
