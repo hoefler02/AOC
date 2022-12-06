@@ -10,6 +10,11 @@ pub fn run() {
     println!("Part Two Overlaps: {}", a);
 }
 
+// let pub part_one_check = |u1: u32, u2: u32, v1: u32, v2: u32| -> u32 {
+//         (v1 >= u1 && v1 <= u2) && (v2 <= u2 && v2 >= v1) ||
+//         (u1 >= v1 && u1 <= v2) && (u2 <= v2 && u2 >= u1)
+// };
+
 fn part_one_overlaps(content: String) -> Option<u32> {
     let mut n: u32 = 0;
     for line in content.lines() {

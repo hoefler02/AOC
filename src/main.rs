@@ -9,6 +9,8 @@ mod rock_paper_scissors;
 mod rucksack;
 #[path="./04-camp-cleanup.rs"]
 mod camp_cleanup;
+#[path="./05-stacks.rs"]
+mod stacks;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -22,6 +24,7 @@ fn main() {
         2 => rock_paper_scissors::run(),
         3 => rucksack::run(),
         4 => camp_cleanup::run(),
+        5 => stacks::run(),
         _ => {
             eprintln!("Invalid Day Value.");
             process::exit(1)
